@@ -145,7 +145,7 @@ const COPY = {
           key: "xrstore",
           tag: "VR EXPERIENCE STORE",
           title: "VR体験施設",
-          jp: "Immersive VR Venue",
+          jp: "Story Dive Theatre WAHHHP",
           year: "2026—",
           venue: "Tokyo (Shinjuku)",
           tagline: "",
@@ -348,9 +348,9 @@ const COPY = {
         {
           tag: "XR EXPERIENCE STORE",
           eyebrow: "02  /  XR EXPERIENCE STORE",
-          title: "Permanent XR Flagship",
-          en: "XR as part of daily life",
-          lede: "Permanent flagship stores at the heart of the city — running multiple XR experiences in parallel.",
+          title: "Permanent VR Venue",
+          en: "XR woven into everyday life",
+          lede: "A permanent flagship venue in the heart of the city, running multiple VR experiences in parallel.",
           itemKeys: ["xrstore"]
         }
       ],
@@ -380,7 +380,7 @@ const COPY = {
           key: "xrstore",
           tag: "XR EXPERIENCE STORE",
           title: "XR Experience Store",
-          jp: "Permanent flagship store",
+          jp: "Story Dive Theatre WAHHHP",
           year: "2026—",
           venue: "Tokyo (TBA)",
           tagline: "",

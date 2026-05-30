@@ -114,7 +114,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   color: var(--fg-dim);
   font-size: clamp(15px, 1.05vw, 17px);
   line-height: 1.85;
-  max-width: 62ch;
+  max-width: min(62ch, 100%);
 }
 .mono{ font-family: var(--font-mono); }
 
@@ -151,6 +151,8 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 @media (max-width: 720px){
   .section-header{ grid-template-columns: 1fr; gap: 16px; }
   .section-header .label{ padding-top: 0; }
+  .section-header > *{ min-width: 0; }
+  .section-header .lede{ max-width: 100%; }
 }
 
 /* ================ Nav ================ */
@@ -1028,6 +1030,8 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 @media (max-width: 900px){
   .about-grid, .about-grid.simple{ grid-template-columns: 1fr; }
   .about-grid.simple > .reveal:first-child{ display: block; }
+  .about-grid > *, .about-grid.simple > *{ min-width: 0; }
+  .about-image{ max-width: 100%; }
 }
 .about-lede{
   font-family: var(--font-jp);

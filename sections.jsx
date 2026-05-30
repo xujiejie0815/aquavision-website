@@ -560,117 +560,91 @@ function MemberPortrait({ i }) {
   if (photos[i]) {
     return <img src={photos[i]} alt="" className="member-portrait-img" />;
   }
-  // Playful character-style placeholders — distinctive geometric "personas"
-  const palettes = [
-  { bg: "#1a3a5c", skin: "#f4d8b8", hair: "#1a1a1a", acc: "#2EB5E6" }, // Stephanie — CEO
-  { bg: "#2d2a4a", skin: "#e8c9a0", hair: "#3d2818", acc: "#D4A82A" }, // Aiko — Creative
-  { bg: "#1a4a3c", skin: "#e6c4a0", hair: "#2a1a0a", acc: "#7ed957" }, // Ryo — Tech
-  { bg: "#4a2a3c", skin: "#d9b48a", hair: "#1a1a1a", acc: "#ff6b6b" } // Marcus — Producer
+  // VR-avatar style portraits — members without a photo rendered as an immersive XR persona
+  // wearing a modern VR headset, in the AquaVision aqua palette.
+  const personas = [
+    // 0 — Stephanie Fu (CEO)
+    { skin: "#f2d3b3", hair: "#15161a", hairStyle: "bob",  visor: "#2EB5E6", glow: "#9fe3ff", bg1: "#16324e", bg2: "#0a1a2c" },
+    // 1 — Aiko Sasaki (Creative)
+    { skin: "#ecc8a2", hair: "#241a12", hairStyle: "long", visor: "#36c0c2", glow: "#a7f0ef", bg1: "#173a4e", bg2: "#0a1f2a" },
+    // 2 — Kenji Nomura (Marketing)
+    { skin: "#e7c6a0", hair: "#161616", hairStyle: "short",visor: "#3b82d6", glow: "#a9cdff", bg1: "#14283f", bg2: "#0a1626" }
   ];
-  const p = palettes[i % palettes.length];
-  const variations = [
-  // 0 — woman with bob, glasses, headset
-  <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
-      <rect width="200" height="200" fill={p.bg} />
-      {/* subtle grid pattern */}
-      <g stroke="rgba(255,255,255,0.04)" strokeWidth="0.5">
-        {Array.from({ length: 11 }).map((_, k) => <line key={`v${k}`} x1={k * 20} y1="0" x2={k * 20} y2="200" />)}
-      </g>
-      {/* shoulders */}
-      <path d={`M 30 200 Q 100 130, 170 200 Z`} fill="#1a1a1a" />
-      {/* neck */}
-      <rect x="86" y="125" width="28" height="22" fill={p.skin} />
-      {/* face */}
-      <ellipse cx="100" cy="100" rx="38" ry="42" fill={p.skin} />
-      {/* hair — bob style */}
-      <path d="M 60 95 Q 60 50, 100 48 Q 140 50, 140 95 L 140 110 L 130 105 Q 130 88, 100 88 Q 70 88, 70 105 L 60 110 Z" fill={p.hair} />
-      {/* glasses */}
-      <circle cx="86" cy="100" r="9" fill="none" stroke="#1a1a1a" strokeWidth="2" />
-      <circle cx="114" cy="100" r="9" fill="none" stroke="#1a1a1a" strokeWidth="2" />
-      <line x1="95" y1="100" x2="105" y2="100" stroke="#1a1a1a" strokeWidth="1.5" />
-      {/* eyes inside glasses */}
-      <circle cx="86" cy="100" r="2" fill="#1a1a1a" />
-      <circle cx="114" cy="100" r="2" fill="#1a1a1a" />
-      {/* smile */}
-      <path d="M 90 118 Q 100 124, 110 118" fill="none" stroke="#8a6e5a" strokeWidth="1.5" strokeLinecap="round" />
-      {/* accent dot */}
-      <circle cx="170" cy="30" r="6" fill={p.acc} opacity="0.8" />
-    </svg>,
-  // 1 — long-haired creative
-  <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
-      <rect width="200" height="200" fill={p.bg} />
-      <g stroke="rgba(255,255,255,0.04)" strokeWidth="0.5">
-        {Array.from({ length: 11 }).map((_, k) => <line key={`v${k}`} x1={k * 20} y1="0" x2={k * 20} y2="200" />)}
-      </g>
-      <path d={`M 25 200 Q 100 135, 175 200 Z`} fill="#2a1a1a" />
-      <rect x="86" y="125" width="28" height="22" fill={p.skin} />
-      <ellipse cx="100" cy="100" rx="36" ry="42" fill={p.skin} />
-      {/* long wavy hair */}
-      <path d="M 55 95 Q 55 45, 100 45 Q 145 45, 145 95 L 148 175 Q 140 165, 135 175 L 138 145 L 132 110 Q 130 95, 100 95 Q 70 95, 68 110 L 62 145 L 65 175 Q 60 165, 52 175 Z" fill={p.hair} />
-      {/* eyes — closed/peaceful */}
-      <path d="M 82 100 Q 87 104, 92 100" fill="none" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M 108 100 Q 113 104, 118 100" fill="none" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" />
-      {/* small smile */}
-      <path d="M 92 118 Q 100 122, 108 118" fill="none" stroke="#8a6e5a" strokeWidth="1.5" strokeLinecap="round" />
-      {/* earring */}
-      <circle cx="64" cy="108" r="2" fill={p.acc} />
-      <circle cx="136" cy="108" r="2" fill={p.acc} />
-    </svg>,
-  // 2 — tech guy with cap
-  <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
-      <rect width="200" height="200" fill={p.bg} />
-      <g stroke="rgba(255,255,255,0.04)" strokeWidth="0.5">
-        {Array.from({ length: 11 }).map((_, k) => <line key={`v${k}`} x1={k * 20} y1="0" x2={k * 20} y2="200" />)}
-      </g>
-      <path d={`M 30 200 Q 100 130, 170 200 Z`} fill="#2d3748" />
-      <rect x="88" y="125" width="24" height="22" fill={p.skin} />
-      <ellipse cx="100" cy="100" rx="35" ry="40" fill={p.skin} />
-      {/* cap brim */}
-      <path d="M 55 78 Q 100 76, 145 78 L 148 84 L 52 84 Z" fill={p.hair} />
-      {/* cap top */}
-      <path d="M 62 78 Q 62 50, 100 48 Q 138 50, 138 78 Z" fill={p.hair} />
-      {/* cap accent stripe */}
-      <rect x="92" y="55" width="16" height="3" fill={p.acc} />
-      {/* eyes — focused */}
-      <circle cx="86" cy="103" r="2.5" fill="#1a1a1a" />
-      <circle cx="114" cy="103" r="2.5" fill="#1a1a1a" />
-      <circle cx="86.5" cy="102" r="0.8" fill="white" />
-      <circle cx="114.5" cy="102" r="0.8" fill="white" />
-      {/* eyebrows */}
-      <line x1="80" y1="94" x2="92" y2="95" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="108" y1="95" x2="120" y2="94" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" />
-      {/* slight smile */}
-      <path d="M 92 120 Q 100 124, 108 120" fill="none" stroke="#8a6e5a" strokeWidth="1.5" strokeLinecap="round" />
-      {/* badge */}
-      <circle cx="170" cy="30" r="6" fill={p.acc} opacity="0.8" />
-    </svg>,
-  // 3 — producer with beard
-  <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
-      <rect width="200" height="200" fill={p.bg} />
-      <g stroke="rgba(255,255,255,0.04)" strokeWidth="0.5">
-        {Array.from({ length: 11 }).map((_, k) => <line key={`v${k}`} x1={k * 20} y1="0" x2={k * 20} y2="200" />)}
-      </g>
-      <path d={`M 25 200 Q 100 128, 175 200 Z`} fill="#1a2a3a" />
-      <rect x="88" y="125" width="24" height="22" fill={p.skin} />
-      <ellipse cx="100" cy="100" rx="36" ry="42" fill={p.skin} />
-      {/* hair — short side */}
-      <path d="M 62 85 Q 62 55, 100 50 Q 138 55, 138 85 L 138 92 Q 120 80, 100 80 Q 80 80, 62 92 Z" fill={p.hair} />
-      {/* beard/stubble */}
-      <path d="M 70 115 Q 75 138, 100 142 Q 125 138, 130 115 Q 125 128, 100 130 Q 75 128, 70 115 Z" fill={p.hair} opacity="0.85" />
-      {/* eyes */}
-      <circle cx="86" cy="103" r="2.5" fill="#1a1a1a" />
-      <circle cx="114" cy="103" r="2.5" fill="#1a1a1a" />
-      {/* glasses (rectangular) */}
-      <rect x="76" y="96" width="20" height="12" fill="none" stroke="#1a1a1a" strokeWidth="1.5" rx="2" />
-      <rect x="104" y="96" width="20" height="12" fill="none" stroke="#1a1a1a" strokeWidth="1.5" rx="2" />
-      <line x1="96" y1="100" x2="104" y2="100" stroke="#1a1a1a" strokeWidth="1.2" />
-      {/* smile under beard */}
-      <path d="M 90 122 Q 100 126, 110 122" fill="none" stroke="#5a4030" strokeWidth="1.5" strokeLinecap="round" />
-      {/* accent */}
-      <circle cx="170" cy="30" r="6" fill={p.acc} opacity="0.8" />
-    </svg>];
+  const p = personas[i % personas.length];
+  const uid = "vrp" + i;
 
-  return variations[i % variations.length];
+  // hair shape behind/above the headset
+  const hairTop =
+    p.hairStyle === "long"
+      ? <path d={"M 56 92 Q 56 44 100 42 Q 144 44 144 92 L 148 178 Q 139 168 134 178 L 137 120 Q 134 96 100 96 Q 66 96 64 120 L 63 178 Q 58 168 52 178 Z"} fill={p.hair} />
+      : p.hairStyle === "bob"
+      ? <path d={"M 60 96 Q 60 48 100 46 Q 140 48 140 96 L 140 124 L 131 118 Q 131 92 100 92 Q 69 92 69 118 L 60 124 Z"} fill={p.hair} />
+      : <path d={"M 63 86 Q 63 50 100 47 Q 137 50 137 86 L 137 96 Q 119 82 100 82 Q 81 82 63 96 Z"} fill={p.hair} />;
+
+  return (
+    <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id={uid + "-bg"} cx="50%" cy="38%" r="80%">
+          <stop offset="0%" stopColor={p.bg1} />
+          <stop offset="100%" stopColor={p.bg2} />
+        </radialGradient>
+        <linearGradient id={uid + "-visor"} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={p.glow} />
+          <stop offset="45%" stopColor={p.visor} />
+          <stop offset="100%" stopColor="#0c2740" />
+        </linearGradient>
+        <radialGradient id={uid + "-halo"} cx="50%" cy="42%" r="60%">
+          <stop offset="0%" stopColor={p.glow} stopOpacity="0.55" />
+          <stop offset="100%" stopColor={p.glow} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* immersive background */}
+      <rect width="200" height="200" fill={"url(#" + uid + "-bg)"} />
+      <g stroke="rgba(255,255,255,0.05)" strokeWidth="0.5">
+        {Array.from({ length: 11 }).map((_, k) => <line key={"v" + k} x1={k * 20} y1="0" x2={k * 20} y2="200" />)}
+        {Array.from({ length: 11 }).map((_, k) => <line key={"h" + k} x1="0" y1={k * 20} x2="200" y2={k * 20} />)}
+      </g>
+      {/* soft aqua halo */}
+      <rect width="200" height="200" fill={"url(#" + uid + "-halo)"} />
+
+      {/* shoulders / bust */}
+      <path d="M 24 200 Q 100 132 176 200 Z" fill="#0e2235" />
+      <path d="M 38 200 Q 100 150 162 200 Z" fill="#13314c" opacity="0.7" />
+      {/* neck */}
+      <rect x="86" y="126" width="28" height="22" rx="6" fill={p.skin} />
+      <rect x="86" y="126" width="28" height="8" fill="#000" opacity="0.12" />
+
+      {/* head */}
+      <ellipse cx="100" cy="100" rx="37" ry="42" fill={p.skin} />
+      {/* hair */}
+      {hairTop}
+
+      {/* lower face — nose + smile (below visor) */}
+      <path d="M 97 116 Q 100 120 103 116" fill="none" stroke="#b98e6e" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M 89 126 Q 100 133 111 126" fill="none" stroke="#9c6f54" strokeWidth="1.8" strokeLinecap="round" />
+
+      {/* VR HEADSET */}
+      {/* head strap around the skull */}
+      <path d="M 62 96 Q 60 78 70 72 L 70 84 Q 64 90 66 100 Z" fill="#0c1c2c" />
+      <path d="M 138 96 Q 140 78 130 72 L 130 84 Q 136 90 134 100 Z" fill="#0c1c2c" />
+      <rect x="60" y="92" width="80" height="9" rx="4.5" fill="#0c1c2c" />
+      {/* visor body */}
+      <rect x="58" y="86" width="84" height="34" rx="14" fill="#10202f" />
+      {/* glossy visor face */}
+      <rect x="63" y="90" width="74" height="26" rx="12" fill={"url(#" + uid + "-visor)"} />
+      {/* visor reflection streaks */}
+      <path d="M 70 96 L 96 96 L 86 110 L 60 110 Z" fill="#ffffff" opacity="0.16" />
+      <path d="M 104 95 L 116 95 L 110 106 L 98 106 Z" fill="#ffffff" opacity="0.10" />
+      {/* visor edge highlight */}
+      <rect x="63" y="90" width="74" height="26" rx="12" fill="none" stroke={p.glow} strokeWidth="1" opacity="0.5" />
+      {/* front sensor dot */}
+      <circle cx="100" cy="103" r="2.4" fill={p.glow} opacity="0.9" />
+
+      {/* corner accent */}
+      <circle cx="170" cy="30" r="6" fill={p.visor} opacity="0.85" />
+    </svg>
+  );
 }
 
 function Team({ copy }) {
