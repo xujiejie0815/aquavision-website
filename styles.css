@@ -45,7 +45,7 @@
 
 *{ box-sizing: border-box; margin: 0; padding: 0; }
 html, body{ background: var(--bg); color: var(--fg); }
-html{ scroll-behavior: smooth; }
+html{ scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
 body{
   font-family: var(--font-jp);
   font-weight: 400;
@@ -312,6 +312,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   position: fixed;
   inset: 0 0 0 auto;
   width: min(80vw, 320px);
+  max-width: 320px;
   background: #FFFFFF;
   background-color: #FFFFFF !important;
   box-shadow: -8px 0 40px rgba(27, 58, 92, 0.22);

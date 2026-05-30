@@ -33,7 +33,32 @@
     </div>
     <a href="#" class="cta-pill primary" onclick="openContactPopup(event)" data-en="Contact">お問い合わせ</a>
   </div>
+  <div class="nav-mobile-right">
+    <div class="nav-mobile-lang lang-toggle" role="group" aria-label="Language">
+      <button data-lang="ja">JA</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <button type="button" class="nav-burger" aria-label="Menu" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+<div class="nav-drawer-overlay" id="navDrawerOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <button type="button" class="nav-drawer-close" aria-label="Close" onclick="closeDrawer()">
+    <span></span><span></span>
+  </button>
+  <ul class="nav-drawer-menu">
+    <li><a href="../index.html#vision" data-en="Vision" onclick="closeDrawer()">ビジョン</a></li>
+    <li><a href="../index.html#about" data-en="About" onclick="closeDrawer()">会社概要</a></li>
+    <li><a href="../index.html#services" data-en="Competence" onclick="closeDrawer()">コンピテンシー</a></li>
+    <li><a href="../index.html#works" data-en="Works" onclick="closeDrawer()">実績</a></li>
+    <li><a href="../index.html#team" data-en="Team" onclick="closeDrawer()">チーム</a></li>
+    <li><a href="../news.html" data-en="News" onclick="closeDrawer()">ニュース</a></li>
+  </ul>
+  <a href="#" class="cta-pill primary nav-drawer-cta" onclick="closeDrawer();openContactPopup(event)" data-en="Contact">お問い合わせ</a>
+</div>
+
 
 <article class="news-article">
   <div class="container">
@@ -188,6 +213,11 @@ please use the form below. We'll reply within 3 business days.">ご相談・お�
   document.addEventListener('keydown', function(ev){ if(ev.key==='Escape') closeContactPopup(); });
 </script>
 
+<script>
+  function toggleDrawer(){ var d=document.getElementById('navDrawer'); var o=document.getElementById('navDrawerOverlay'); var open=d.classList.toggle('open'); o.classList.toggle('open', open); document.body.style.overflow= open?'hidden':''; }
+  function closeDrawer(){ document.getElementById('navDrawer').classList.remove('open'); document.getElementById('navDrawerOverlay').classList.remove('open'); document.body.style.overflow=''; }
+  document.addEventListener('keydown', function(ev){ if(ev.key==='Escape') closeDrawer(); });
+</script>
 <script src="../i18n-subpage.js"></script>
 </body>
 </html>
