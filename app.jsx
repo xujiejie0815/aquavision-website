@@ -126,11 +126,11 @@ function App() {
       <main>
         <Hero copy={copy} lang={lang} />
         <About copy={copy} />
-        <News copy={copy} />
+        <News copy={copy} lang={lang} />
         <Works copy={copy} />
         <Business copy={copy} />
         <Services copy={copy} />
-        <Team copy={copy} />
+        <Team copy={copy} lang={lang} />
         <Partners copy={copy} />
         <Contact copy={copy} />
       </main>

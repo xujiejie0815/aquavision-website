@@ -352,6 +352,9 @@ please use the form below. We'll reply within 3 business days.">ご相談・お�
 </style>
 
 <script>
+  // WordPress headless CMS config (set after WP is installed)
+  window.WP_API_BASE = null;
+
   var JOBS = {
     store: {
       ja: {
@@ -477,6 +480,60 @@ please use the form below. We'll reply within 3 business days.">ご相談・お�
   function toggleDrawer(){ var d=document.getElementById('navDrawer'); var o=document.getElementById('navDrawerOverlay'); var open=d.classList.toggle('open'); o.classList.toggle('open', open); document.body.style.overflow= open?'hidden':''; }
   function closeDrawer(){ document.getElementById('navDrawer').classList.remove('open'); document.getElementById('navDrawerOverlay').classList.remove('open'); document.body.style.overflow=''; }
   document.addEventListener('keydown', function(ev){ if(ev.key==='Escape') closeDrawer(); });
+
+  // Fetch live job listings from WordPress when WP_API_BASE is configured.
+  // WP Custom Post Type: av_job
+  // Required ACF fields per job post:
+  //   dept (text), title_en (text), summary_ja (textarea), summary_en (textarea)
+  //   tags_ja (text, comma-separated), tags_en (text, comma-separated)
+  //   eyebrow_ja (text), eyebrow_en (text)
+  //   employ_ja (text), employ_en (text)
+  //   sections_ja (textarea, JSON: [["見出し","本文"],...])
+  //   sections_en (textarea, JSON: [["Heading","Body"],...])
+  (function () {
+    var base = window.WP_API_BASE;
+    if (!base) return;
+    fetch(base + '/av_job?per_page=20&_fields=id,title,slug,acf&orderby=menu_order&order=asc')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      .then(function (posts) {
+        var parseSections = function (str) { try { return JSON.parse(str || '[]'); } catch (e) { return []; } };
+        posts.forEach(function (p) {
+          var a = p.acf || {};
+          JOBS[p.slug] = {
+            ja: { eyebrow: a.eyebrow_ja || '', title: p.title.rendered, employ: a.employ_ja || '', sections: parseSections(a.sections_ja) },
+            en: { eyebrow: a.eyebrow_en || '', title: a.title_en || p.title.rendered, employ: a.employ_en || '', sections: parseSections(a.sections_en) }
+          };
+        });
+        var ul = document.querySelector('.job-list');
+        if (!ul) return;
+        ul.innerHTML = '';
+        posts.forEach(function (p, idx) {
+          var a = p.acf || {};
+          var tagsJa = (a.tags_ja || '').split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+          var tagsEn = (a.tags_en || '').split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+          var num = String(idx + 1).padStart(2, '0');
+          var tagsHtml = tagsJa.map(function (t, ti) {
+            return '<span class="job-tag" data-en="' + (tagsEn[ti] || t).replace(/"/g, '&quot;') + '">' + t + '</span>';
+          }).join('');
+          var li = document.createElement('li');
+          li.className = 'job-row';
+          li.innerHTML =
+            '<div class="job-team">' + (a.dept || '') + '</div>' +
+            '<div class="job-main">' +
+              '<div class="job-id">' + num + '</div>' +
+              '<h3 class="job-title"><span data-en="' + (a.title_en || '').replace(/"/g,'&quot;') + '">' + p.title.rendered + '</span></h3>' +
+              '<p class="job-summary" data-en="' + (a.summary_en || '').replace(/"/g,'&quot;') + '">' + (a.summary_ja || '') + '</p>' +
+              '<div class="job-tags">' + tagsHtml + '</div>' +
+            '</div>' +
+            '<button type="button" class="job-apply" onclick="openJob(\'' + p.slug + '\')" data-en="Details">詳細</button>';
+          ul.appendChild(li);
+        });
+        if (window.AV_getLang && window.AV_getLang() === 'en') {
+          document.querySelectorAll('[data-en]').forEach(function (el) { el.textContent = el.getAttribute('data-en'); });
+        }
+      })
+      .catch(function () { /* keep static JOBS */ });
+  })();
 </script>
 <script src="i18n-subpage.js"></script>
 </body>

@@ -486,15 +486,37 @@ function Technology({ copy }) {
 }
 
 /* ---------------- News ---------------- */
-function News({ copy }) {
+// WordPress CPT: av_news
+// Required ACF fields: title_en (text), cat (text e.g. MEDIA), cat_cls (text e.g. media)
+function News({ copy, lang }) {
   const n = copy.news;
+  const [wpItems, setWpItems] = React.useState(null);
+
+  React.useEffect(() => {
+    const base = window.WP_API_BASE;
+    if (!base) return;
+    fetch(`${base}/av_news?per_page=5&_fields=id,date,slug,title,acf&orderby=date&order=desc`)
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(posts => {
+        setWpItems(posts.map(p => ({
+          date: (p.date || '').slice(0, 10).replace(/-/g, '.'),
+          cat: p.acf?.cat || '',
+          catCls: (p.acf?.cat_cls || p.acf?.cat || '').toLowerCase(),
+          title: (lang === 'en' && p.acf?.title_en) ? p.acf.title_en : (p.title?.rendered || ''),
+          slug: p.slug
+        })));
+      })
+      .catch(() => setWpItems(null));
+  }, [lang]);
+
+  const items = wpItems ?? n.items;
   return (
     <section id="news" className="section" data-screen-label="News">
       <div className="container">
         <SectionHeader label={n.label} title={n.title} />
         <ul className="news-list reveal">
-          {n.items.map((it, i) => {
-            const slug = String(i + 1).padStart(2, '0');
+          {items.map((it, i) => {
+            const slug = wpItems ? it.slug : String(i + 1).padStart(2, '0');
             return (
               <li key={i} className="news-item">
                 <a href={`news/${slug}.html`} className="news-item-link" aria-label={it.title}>
@@ -509,7 +531,6 @@ function News({ copy }) {
                   </span>
                 </a>
               </li>);
-
           })}
         </ul>
         <div style={{ marginTop: '32px', textAlign: 'right' }}>
@@ -523,7 +544,6 @@ function News({ copy }) {
         </div>
       </div>
     </section>);
-
 }
 
 /* ---------------- Partners ---------------- */
@@ -554,7 +574,10 @@ function Partners({ copy }) {
 }
 
 /* ---------------- Team ---------------- */
-function MemberPortrait({ i }) {
+function MemberPortrait({ i, photoUrl }) {
+  if (photoUrl) {
+    return <img src={photoUrl} alt="" className="member-portrait-img" />;
+  }
   // Real photo for specific members
   const photos = { 0: RES("assets/team-fu.jpg"), 2: RES("assets/team-xu.png") };
   if (photos[i]) {
@@ -647,9 +670,35 @@ function MemberPortrait({ i }) {
   );
 }
 
-function Team({ copy }) {
+// WordPress CPT: av_team
+// Required ACF fields: name_jp (text), role (text), bio_ja (textarea), bio_en (textarea),
+//   tags (text, comma-separated), photo_url (text or image URL)
+// Post ordering: use "Menu Order" (set via Quick Edit) to control display order.
+function Team({ copy, lang }) {
   const t = copy.team;
   const [open, setOpen] = React.useState(null);
+  const [wpMembers, setWpMembers] = React.useState(null);
+
+  React.useEffect(() => {
+    const base = window.WP_API_BASE;
+    if (!base) return;
+    fetch(`${base}/av_team?per_page=20&_fields=id,title,acf&orderby=menu_order&order=asc`)
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(posts => {
+        setWpMembers(posts.map(p => ({
+          role: p.acf?.role || '',
+          en: p.title?.rendered || '',
+          jp: p.acf?.name_jp || '',
+          bio: lang === 'en' ? (p.acf?.bio_en || p.acf?.bio_ja || '') : (p.acf?.bio_ja || ''),
+          tags: typeof p.acf?.tags === 'string'
+            ? p.acf.tags.split(',').map(s => s.trim()).filter(Boolean)
+            : (Array.isArray(p.acf?.tags) ? p.acf.tags : []),
+          photoUrl: p.acf?.photo_url || null
+        })));
+      })
+      .catch(() => setWpMembers(null));
+  }, [lang]);
+
   // close on escape
   React.useEffect(() => {
     if (open == null) return;
@@ -662,22 +711,23 @@ function Team({ copy }) {
     };
   }, [open]);
 
-  const m = open != null ? t.items[open] : null;
+  const items = wpMembers ?? t.items;
+  const m = open != null ? items[open] : null;
   return (
     <section id="team" className="section" data-screen-label="Team">
       <div className="container">
         <SectionHeader label={t.label} title={t.title} lede={t.lede} />
         <div className="team-grid reveal">
-          {t.items.map((mem, i) =>
+          {items.map((mem, i) =>
           <button
             type="button"
             key={i}
             className="member"
             onClick={() => setOpen(i)}
             aria-label={`${mem.role} — ${mem.en}`}>
-            
+
               <div className="member-photo">
-                <MemberPortrait i={i} />
+                <MemberPortrait i={i} photoUrl={mem.photoUrl} />
                 <span className="member-plus" aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <line x1="12" y1="4" x2="12" y2="20" />
@@ -710,7 +760,7 @@ function Team({ copy }) {
               </svg>
             </button>
             <div className="member-modal-photo">
-              <MemberPortrait i={open} />
+              <MemberPortrait i={open} photoUrl={m.photoUrl} />
             </div>
             <div className="member-modal-body">
               <div className="member-modal-role">{m.role}</div>
