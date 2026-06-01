@@ -27,7 +27,8 @@ const COPY = {
         ["社名", "AquaVision株式会社  /  AquaVision Inc."],
         ["設立", "2024年3月"],
         ["代表者", "代表取締役CEO  Stephanie Fu（付 斯瑶）"],
-        ["所在地", "〒105-6415\n東京都港区虎ノ門1丁目17-1\n虎ノ門ヒルズビジネスタワー 15階"],
+        ["本社オフィス", "〒105-6415\n東京都港区虎ノ門1丁目17-1\n虎ノ門ヒルズビジネスタワー 15階"],
+        ["登記住所", "〒162-0844\n東京都新宿区市谷八幡町8番地\nTKP市ヶ谷ビル2F"],
         ["事業", "XR・VRコンテンツ制作\n IP・アーティストコラボレーション\nブランド向けXR体験設計\nイマーシブ空間・イベント演出\nIPローカライズ・グローバル展開支援"]
       ]
     },
@@ -261,8 +262,9 @@ const COPY = {
         ["Name", "AquaVision Inc."],
         ["Founded", "March 2024"],
         ["CEO", "Stephanie Fu  /  付 斯瑶"],
-        ["HQ", "1-17-1 Toranomon, Minato-ku, Tokyo 105-6415\nToranomon Hills Business Tower 15F"],
-        ["Business", "VR experience build ／ IP Work (artist & brand collaboration) ／ Designing brand experience with VR"]
+        ["Head Office", "1-17-1 Toranomon, Minato-ku, Tokyo 105-6415\nToranomon Hills Business Tower 15F"],
+        ["Registered", "8 Ichigaya Hachiman-cho, Shinjuku-ku, Tokyo 162-0844\nTKP Ichigaya Building 2F"],
+        ["Business", "XR / VR content production\nIP & artist collaboration\nBrand XR experience design\nImmersive spaces & event production\nIP localization & global expansion"]
       ]
     },
     vision: {
@@ -287,7 +289,7 @@ const COPY = {
     business: {
       label: "04 / Business",
       title: "Business",
-      lede: "Three business lines built around a single VISION — content, IP, and marketing, all grounded in XR.",
+      lede: "Spanning XR / VR experiences, IP content and marketing, we create new forms of entertainment.",
       items: [
         {
           num: "01",
@@ -299,9 +301,9 @@ const COPY = {
           capabilities: [
             "VR / XR technical production",
             "XR venue design & build",
-            "Merchandise development",
             "VR / XR pop-up planning & operation",
-            "Permanent VR venue operation"
+            "Permanent VR venue operation",
+            "Merchandise development"
           ]
         },
         {
@@ -334,23 +336,22 @@ const COPY = {
     works: {
       label: "03 / Works",
       title: "Work",
-      lede: "AquaVision's business runs along two distinct lines.",
+      lede: "AquaVision delivers a range of VR / XR work centered on IP and brand experiences.",
       segments: [
         {
           tag: "VR EXHIBITION",
           eyebrow: "01  /  VR EXHIBITION",
           title: "Touring VR Exhibitions",
-          en: "Step inside masterpieces",
           lede: "Large-scale touring exhibitions that put visitors inside masterpieces and cultural heritage.",
           ctaUrl: "https://prtimes.jp/main/html/rd/p/000000488.000024137.html",
           itemKeys: ["artmasters"]
         },
         {
-          tag: "XR EXPERIENCE STORE",
-          eyebrow: "02  /  XR EXPERIENCE STORE",
+          tag: "VR EXPERIENCE STORE",
+          eyebrow: "02  /  VR EXPERIENCE STORE",
           title: "Permanent VR Venue",
-          en: "XR woven into everyday life",
-          lede: "A permanent flagship venue in the heart of the city, running multiple VR experiences in parallel.",
+          comingSoon: true,
+          lede: "A permanent, urban VR venue running a variety of VR content — a new entertainment space where anyone can enjoy immersive experiences as part of daily life.",
           itemKeys: ["xrstore"]
         }
       ],
@@ -362,33 +363,33 @@ const COPY = {
           tag: "VR EXHIBITION",
           title: "Art Masters",
           jp: "Prado VR Art Exhibition",
-          year: "2024–",
-          venue: "Shanghai → Tokyo",
-          tagline: "Step Inside the Masterpieces.",
+          year: "2025—",
+          venue: "Tokyo (Tokyo Tower)",
+          tagline: "",
           intro: "From an era of looking at masterpieces, to an era of journeying inside them.",
-          body: "'Art Masters — Prado VR Art Exhibition' finally arrives in Japan. A new multiplayer immersive experience that lets visitors step inside world masterpieces — Hieronymus Bosch's 'The Garden of Earthly Delights,' works by Diego Velázquez, and more.\n\nA fundamental redefinition of how we experience art: sensations the original canvas could never reach, delivered through space, sound and bodily motion. The first run in Shanghai (2024) recorded over 95% visitor satisfaction.\n\nGeneral Producer: Acciona Living & Culture. Licensor: Museo del Prado. Supported by the Spanish Embassy, AECID, and Cooperación Española. Cooperation: Tokyo Tower. Co-Organizer: TKP. Organizer: AquaVision.",
+          body: "'Art Masters: Prado VR Art Exhibition' finally arrives in Japan. A new kind of VR immersive experience that lets visitors step inside world masterpieces — Hieronymus Bosch's 'The Garden of Earthly Delights,' Diego Velázquez's 'Las Meninas,' and more.\n\nIt fundamentally redefines the traditional style of art appreciation, delivering sensations the original canvas could never reach through space, sound and bodily motion. The first run, held in Shanghai in 2025, recorded over 95% visitor satisfaction.",
           meta: [
-            ["Producer", "Acciona Living & Culture"],
-            ["Organizer", "AquaVision"],
-            ["Co-Organizer", "TKP"],
-            ["Cooperation", "Tokyo Tower"],
+            ["General Producer", "AquaVision"],
+            ["Production Partner", "Acciona Living & Culture"],
             ["Licensor", "Museo del Prado"],
-            ["First run", "Shanghai 2024 · 95%+ CSAT"]
+            ["Co-host", "TKP"],
+            ["Cooperation", "Tokyo Tower"],
+            ["Support", "Embassy of Spain · AECID · Cooperación Española"]
           ]
         },
         {
           key: "xrstore",
-          tag: "XR EXPERIENCE STORE",
-          title: "XR Experience Store",
+          tag: "VR EXPERIENCE STORE",
+          title: "Permanent VR Venue",
           jp: "Story Dive Theatre WAHHHP",
           year: "2026—",
-          venue: "Tokyo (TBA)",
+          venue: "Tokyo (Shinjuku)",
           tagline: "",
-          intro: "A permanent XR store in the heart of the city — anyone can drop in and dive into XR.",
-          body: "AquaVision's permanent XR experience store.\n\nUnlike single-run event exhibitions, this is a flagship store running multiple XR experiences in parallel — a place where tourists and locals alike can step in and where XR becomes part of daily life. Cutting-edge VR / AR / MR content rotates daily and weekly, balancing repeat visits with continuous fresh news cycles.\n\nFirst location planned in central Tokyo. Stay tuned via News for updates.",
+          intro: "A permanent, urban VR venue where a variety of VR experiences become part of daily life.",
+          body: "A permanent VR experience venue from AquaVision. As a space where multiple VR contents can be experienced at any time, it aims to be a new entertainment hub where VR becomes part of everyday life.\n\nWe deliver a 'Story Dive Theatre'-style experience that lets you step into a different 'story world' for each work — action, fantasy, art and more. Fusing cutting-edge VR technology with spatial direction, it offers immersion that feels like stepping inside the story itself.\n\nWith continuous content updates, we are building a new VR entertainment space that balances repeat visits with ongoing buzz. The first location is planned for Shinjuku, Tokyo. Details will be announced via News.",
           meta: [
-            ["Status", "Coming soon"],
-            ["Opening", "TBA"]
+            ["Status", "Coming Soon"],
+            ["Area", "Tokyo (Shinjuku)"]
           ]
         }
       ]
@@ -432,17 +433,14 @@ const COPY = {
       lede: "Art, engineering, business — a multinational tight-knit team.",
       items: [
         { role: "Founder · CEO", en: "Stephanie Fu", jp: "付 斯瑶",
-          bio: "Founder and CEO of AquaVision. Based between Shanghai and Tokyo, building a business at the intersection of technology, art and cultural heritage. Vision: rebuild the IP of world cultural heritage with cutting-edge XR technology and deliver it as a 'portable cultural resource' accessible to everyone.",
+          bio: "Founder and Representative Director & CEO of AquaVision. After completing her master's degree at Keio University Graduate School of Commerce (2021), she began working between Shanghai and Tokyo. Finding a business opportunity at the intersection of technology, art and cultural heritage, she founded AquaVision.\n\nShe acquires the IP licenses of cultural heritage around the world and rebuilds them into new experiences with cutting-edge XR technology — with a mission to deliver 'portable cultural resources' that anyone can access on equal terms, regardless of place or circumstance.\n\nHer innovative approach has drawn attention at home and abroad, earning the Passion Award 'Creative Innovation Prize' in 2025. Through the fusion of culture and technology, she is pioneering the next generation of global cultural experiences.",
           tags: ["Strategy", "IP Licensing", "Global"] },
-        { role: "Creative Director", en: "Aiko Sasaki", jp: "Aiko Sasaki",
-          bio: "Director and art director. Career spanning theater direction, contemporary art and XR experience design — leads creative across all AquaVision works. Specializes in spatial design that operates on the body and emotion of the visitor.",
+        { role: "Creative Director", en: "Aiko Sasaki", jp: "佐々木 愛子",
+          bio: "Director and art director, with a career spanning theater direction, contemporary art and XR experience design. Leads creative across all AquaVision works, specializing in spatial design that operates on the body and emotion of the visitor.",
           tags: ["Direction", "Spatial", "Narrative"] },
-        { role: "Tech Lead", en: "Ryo Tanaka", jp: "Ryo Tanaka",
-          bio: "Real-time rendering and generative AI pipeline lead. Designs large-scale multi-user XR experiences in Unreal Engine and Unity, and implements edge-realtime synchronization networking.",
-          tags: ["Unreal", "AI", "Realtime"] },
-        { role: "Producer", en: "Marcus Chen", jp: "Marcus Chen",
-          bio: "International producer. Handles negotiations with museums and cultural institutions, touring-exhibition logistics, and partnerships with embassies and governments. Trilingual (Beijing / Tokyo / Madrid).",
-          tags: ["Production", "Logistics", "Diplomacy"] }
+        { role: "Marketing · Content Produce", en: "Kenji Nomura", jp: "野村 健児",
+          bio: "Graduate of Rikkyo University. Worked as a communication planner at an advertising agency, handling concept development and integrated marketing communications (IMC) design.\n\nToday he provides end-to-end marketing support — from strategy to execution — primarily for ventures, with a strength in data-driven digital marketing strategy.\n\nHe joined AquaVision in January 2026 and works as a content producer in addition to marketing.",
+          tags: ["Marketing", "Strategy", "Content"] }
       ]
     },
     ceo: {
@@ -459,8 +457,7 @@ const COPY = {
       cta1: "Contact us",
       cta2: "Join our team",
       meta: [
-        ["Email", "contact@aquavision.jp"],
-        ["Press", "press@aquavision.jp"],
+        ["Email", "info@aquavision.tech"],
         ["Address", "Tokyo, JP"]
       ]
     },
